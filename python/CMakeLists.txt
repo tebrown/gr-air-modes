@@ -44,6 +44,7 @@ GR_PYTHON_INSTALL(
     msprint.py
     radio.py
     raw_server.py
+    beast.py
     rx_path.py
     sbs1.py
     sql.py

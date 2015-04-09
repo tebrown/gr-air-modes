@@ -63,6 +63,7 @@ from parse import *
 from msprint import output_print
 from sql import output_sql
 from sbs1 import output_sbs1
+from beast import output_beast
 from kml import output_kml, output_jsonp
 from raw_server import raw_server
 from radio import modes_radio

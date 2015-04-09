@@ -29,6 +29,7 @@ from gnuradio.eng_option import eng_option
 from gnuradio.gr.pubsub import pubsub
 from gnuradio.filter import pfb
 from optparse import OptionParser, OptionGroup
+import binascii
 import air_modes
 import zmq
 import threading

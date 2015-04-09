@@ -423,6 +423,7 @@ def parse_TCAS_CRM(data):
 def make_parser(pub):
   publisher = pub
   def publish(message):
+    print(message)
     [data, ecc, reference, timestamp] = message.split()
     try:
       ret = air_modes.modes_report(modes_reply(int(data, 16)),
@@ -431,6 +432,7 @@ def make_parser(pub):
                                    air_modes.stamp(0, float(timestamp)))
       pub["modes_dl"] = ret
       pub["type%i_dl" % ret.data.get_type()] = ret
+      pub["raw"] = air_modes.modes_report(int(data, 16), int(ecc,16), 10*math.log10(max(1e-8, float(reference))), air_modes.stamp(0, float(timestamp)))
     except ADSBError:
       pass
 

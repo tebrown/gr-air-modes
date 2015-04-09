@@ -50,6 +50,7 @@ def main():
                        help="open an SBS-1-compatible server on port 30003")
   optparser.add_option("-m","--multiplayer", type="string", default=None,
                        help="FlightGear server to send aircraft data, in format host:port")
+  optparser.add_option("-b", "--beast", action="store_true", default=None, help="Listed on port 30005 with BEAST data")
 
   (options, args) = optparser.parse_args()
 
@@ -75,12 +76,15 @@ def main():
     sqldb = air_modes.output_sql(cpr_dec, dbname, lock, publisher) #input into the db
     kmlgen = air_modes.output_kml(options.kml, dbname, my_position, lock) #create a KML generating thread to read from the db
 
-  if options.no_print is not True:
+  if not options.no_print:
     printer = air_modes.output_print(cpr_dec, publisher)
 
   if options.multiplayer is not None:
     [fghost, fgport] = options.multiplayer.split(':')
     fgout = air_modes.output_flightgear(cpr_dec, fghost, int(fgport), publisher)
+
+  if options.beast:
+    beast = air_modes.output_beast(cpr_dec, 30005, publisher)
 
   if options.sbs1 is True:
     sbs1port = air_modes.output_sbs1(cpr_dec, 30003, publisher)
