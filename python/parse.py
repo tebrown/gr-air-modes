@@ -423,7 +423,6 @@ def parse_TCAS_CRM(data):
 def make_parser(pub):
   publisher = pub
   def publish(message):
-    print(message)
     [data, ecc, reference, timestamp] = message.split()
     try:
       ret = air_modes.modes_report(modes_reply(int(data, 16)),
